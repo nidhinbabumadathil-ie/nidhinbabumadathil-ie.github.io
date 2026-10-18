@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Nidhin Babu Madathil — Software Engineer</title>
-<meta name="description" content="Software engineer in Athlone, Ireland. Python, FastAPI and SQL services, data flows, and the reliability work that keeps them running." />
+<meta name="description" content="Software engineer in Athlone, Ireland. Python, FastAPI and SQL systems, data pipelines, and machine learning. MSc Data Analytics, TUS." />
 <meta property="og:title" content="Nidhin Babu Madathil — Software Engineer" />
-<meta property="og:description" content="Python, FastAPI and SQL services, data flows, and the reliability work that keeps them running." />
+<meta property="og:description" content="Python, FastAPI and SQL systems, data pipelines, and machine learning. MSc Data Analytics, TUS." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,6 +31,7 @@
     --net-node:#7FA6FF;
     --net-link:#2B3C5C;
     --glow:rgba(109,155,255,.10);
+    --accent3:#4FD1A5;
   }
   html[data-theme="light"]{
     --bg:#E9EDF0;
@@ -48,6 +49,7 @@
     --net-node:#5C7FC4;
     --net-link:#B6C4D2;
     --glow:rgba(27,71,200,.07);
+    --accent3:#0B7D55;
   }
   :root{
     --display:"Bricolage Grotesque", system-ui, sans-serif;
@@ -141,7 +143,7 @@
   .themetoggle:hover{color:var(--ink);border-color:var(--signal);}
 
   /* ============ HERO ============ */
-  .hero{padding:clamp(56px,10vw,110px) 0 var(--gap);}
+  .hero{padding:clamp(40px,6vw,76px) 0 var(--gap);}
   .status{display:flex;align-items:center;gap:9px;margin-bottom:26px;}
   .dot{
     width:8px;height:8px;border-radius:50%;background:var(--signal);
@@ -178,6 +180,81 @@
   .btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px -10px var(--signal);}
   .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line);}
   .btn.ghost:hover{border-color:var(--signal);color:var(--signal);}
+
+
+  /* ============ HERO LAYOUT + DETECTION VIEWPORT ============ */
+  .heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,60px);align-items:center;}
+  .heroText{min-width:0;}
+  .heroText h1{font-size:clamp(34px,4.3vw,52px);max-width:19ch;margin-bottom:22px;}
+  .heroText .lede{font-size:clamp(16px,1.35vw,17.5px);margin-bottom:28px;}
+
+  .scope{
+    position:relative;width:100%;aspect-ratio:4/3;
+    border:1px solid var(--line);border-radius:14px;
+    background:var(--card-solid);
+    overflow:hidden;
+  }
+  .scope svg{width:100%;height:100%;display:block;}
+  .scopeBar{
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--graphite);
+    margin-top:10px;
+  }
+  .scopeBar b{color:var(--signal);font-weight:500;}
+
+  /* detection boxes */
+  .bx{opacity:0;}
+  .bx rect{fill:none;stroke:var(--signal);stroke-width:1.6;}
+  .bx .tagbg{fill:var(--signal);stroke:none;}
+  .bx .tag{
+    font-family:var(--mono);font-size:8.5px;fill:var(--card-solid);
+    letter-spacing:.04em;
+  }
+  .bx.b2 rect{stroke:var(--amber);}
+  .bx.b2 .tagbg{fill:var(--amber);}
+  .bx.b3 rect{stroke:var(--accent3);}
+  .bx.b3 .tagbg{fill:var(--accent3);}
+  .subj{fill:var(--graphite);opacity:.42;}
+
+  .anim-on .bx{animation:bxin 7s cubic-bezier(.2,.8,.3,1) infinite;}
+  .anim-on .b1{animation-delay:.6s;}
+  .anim-on .b2{animation-delay:1.25s;}
+  .anim-on .b3{animation-delay:1.9s;}
+  @keyframes bxin{
+    0%,4%   {opacity:0;transform:scale(.965);}
+    10%,78% {opacity:1;transform:scale(1);}
+    88%,100%{opacity:0;transform:scale(1);}
+  }
+  .bx{transform-box:fill-box;transform-origin:center;}
+
+  /* sweep */
+  .sweep{opacity:.85;}
+  .anim-on .sweep{animation:sweep 7s cubic-bezier(.4,0,.2,1) infinite;}
+  @keyframes sweep{
+    0%  {transform:translateY(0);opacity:0;}
+    6%  {opacity:.9;}
+    55% {transform:translateY(252px);opacity:.9;}
+    66% {transform:translateY(252px);opacity:0;}
+    100%{transform:translateY(0);opacity:0;}
+  }
+
+  /* subject blobs breathe */
+  .anim-on .blob{animation:drift 11s ease-in-out infinite alternate;}
+  .anim-on .blob.d2{animation-delay:-3.5s;}
+  .anim-on .blob.d3{animation-delay:-7s;}
+  @keyframes drift{from{transform:translate(0,0);}to{transform:translate(4px,-5px);}}
+
+  @media (max-width:900px){
+    .heroGrid{grid-template-columns:1fr;gap:34px;}
+    .scope{max-width:460px;}
+    .heroText h1{font-size:clamp(32px,7vw,46px);max-width:16ch;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .bx{opacity:1 !important;animation:none !important;}
+    .sweep{display:none;}
+    .blob{animation:none !important;}
+  }
 
   /* ============ SECTION GRID ============ */
   section{padding-bottom:var(--gap);}
@@ -257,6 +334,29 @@
   }
   .step p{margin:0;font-size:15px;line-height:1.5;color:var(--ink-soft);}
 
+  /* ============ SHOTS ============ */
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0 4px;}
+  .shots a{
+    display:block;border:1px solid var(--line);border-radius:10px;
+    overflow:hidden;line-height:0;
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .shots a:hover{border-color:var(--signal);transform:translateY(-3px);}
+  .shots img{width:100%;height:auto;display:block;}
+  .shots figcaption,.shotcap{
+    font-family:var(--mono);font-size:11px;color:var(--graphite);
+    margin-top:8px;line-height:1.4;
+  }
+  .repolink{
+    display:inline-block;font-family:var(--mono);font-size:12px;
+    margin-top:18px;border-bottom:1px solid var(--line);padding-bottom:2px;
+  }
+  .repolink:hover{border-bottom-color:var(--signal);}
+
+  /* ============ ABOUT ============ */
+  .about p{max-width:64ch;color:var(--ink-soft);margin:0 0 18px;}
+  .about p:last-child{margin-bottom:0;}
+
   /* ============ EDUCATION ============ */
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   .card{padding:20px 22px;}
@@ -292,6 +392,7 @@
     .step + .step{padding-left:0;border-left:0;border-top:1px solid var(--line);padding-top:18px;}
     .step{padding-right:0;}
     .cards{grid-template-columns:1fr;}
+    .shots{grid-template-columns:1fr;}
     .topbar{padding:14px 0;}
   }
   @media (prefers-reduced-motion:reduce){
@@ -314,8 +415,9 @@
   <header class="topbar" id="topbar">
     <div class="mark">Nidhin Babu Madathil</div>
     <div class="navgroup">
+      <a href="#about">About</a>
       <a href="#work">Experience</a>
-      <a href="#project">Project</a>
+      <a href="#project">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
       <button class="themetoggle" id="themetoggle" aria-label="Switch to light mode">LIGHT</button>
@@ -324,26 +426,139 @@
 
   <!-- HERO -->
   <div class="hero">
+   <div class="heroGrid">
+    <div class="heroText">
     <div class="status">
       <span class="dot" aria-hidden="true"></span>
       <span class="kicker">Athlone, Ireland &nbsp;·&nbsp; open to backend &amp; data roles</span>
     </div>
 
-    <h1 id="headline">Backend services, data flows, and the <span class="em">unglamorous</span> work that keeps them up.</h1>
+    <h1 id="headline">Backend services, data pipelines, and the <span class="em">models</span> that sit on top of them.</h1>
 
     <p class="lede">
-      I'm a software engineer with 2+ years building Python and FastAPI services over SQL databases —
-      owning features from design through deployment, and explaining them to people who don't write code.
-      Currently finishing an MSc in Data Analytics at TUS.
+      Software engineer with 2+ years building Python, FastAPI and SQL systems, owning features from
+      design through deployment, training computer vision models, and explaining the result to people who
+      don't write code. MSc in Data Analytics (2.1 Honours) from TUS Athlone, BE in Computer Science from
+      Kerala.
     </p>
 
     <div class="actions">
       <a class="btn" href="mailto:nidhinbabu710@gmail.com">Email me</a>
-      <a class="btn ghost" href="MadathilNidhinBabu.pdf" download>Download CV</a>
-      <a class="btn ghost" href="https://github.com/nidhinbabumadathil-ie">GitHub</a>
-      <a class="btn ghost" href="https://www.linkedin.com/in/nidhin-babu-m-57a533237">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/nidhinbabumadathil-ie" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/nidhin-babu-m-57a533237" target="_blank" rel="noopener">LinkedIn</a>
     </div>
+    </div><!-- /heroText -->
+
+    <div class="heroViz reveal">
+      <div class="scope" id="scope">
+        <svg viewBox="0 0 336 252" role="img"
+             aria-label="Illustration of an object detection model drawing labelled bounding boxes over a scene">
+          <defs>
+            <linearGradient id="gA" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="var(--signal)" stop-opacity=".30"/>
+              <stop offset="100%" stop-color="var(--signal)" stop-opacity=".05"/>
+            </linearGradient>
+            <linearGradient id="gB" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"  stop-color="var(--amber)" stop-opacity=".28"/>
+              <stop offset="100%" stop-color="var(--amber)" stop-opacity=".04"/>
+            </linearGradient>
+            <linearGradient id="gSweep" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%"   stop-color="var(--signal)" stop-opacity="0"/>
+              <stop offset="50%"  stop-color="var(--signal)" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="var(--signal)" stop-opacity="0"/>
+            </linearGradient>
+            <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+              <path d="M24 0H0V24" fill="none" stroke="var(--line)" stroke-width=".6" opacity=".55"/>
+            </pattern>
+          </defs>
+
+          <rect width="336" height="252" fill="url(#grid)"/>
+
+          <!-- scene -->
+          <g class="subj blob">
+            <!-- person -->
+            <circle cx="76" cy="68" r="12.5"/>
+            <path d="M65 83 h22 a5 5 0 0 1 5 5 v44 a4 4 0 0 1-4 4 h-24 a4 4 0 0 1-4-4 v-44 a5 5 0 0 1 5-5 z"/>
+            <rect x="55.5" y="86" width="8" height="42" rx="4"/>
+            <rect x="88.5" y="86" width="8" height="42" rx="4"/>
+            <rect x="65" y="134" width="9.5" height="62" rx="4.5"/>
+            <rect x="77.5" y="134" width="9.5" height="62" rx="4.5"/>
+          </g>
+
+          <g class="subj blob d2">
+            <!-- dog -->
+            <rect x="118" y="168" width="40" height="20" rx="9.5"/>
+            <circle cx="162" cy="166" r="9"/>
+            <path d="M168 164 h9 a3 3 0 0 1 3 3 v3 a3 3 0 0 1-3 3 h-9 z"/>
+            <ellipse cx="157.5" cy="165" rx="4.2" ry="7.5"/>
+            <rect x="123" y="186" width="5" height="15" rx="2.5"/>
+            <rect x="133" y="186" width="5" height="15" rx="2.5"/>
+            <rect x="144" y="186" width="5" height="15" rx="2.5"/>
+            <rect x="152" y="186" width="5" height="15" rx="2.5"/>
+            <path d="M118 172 c-9-3 -12-10 -9-16 l5 3 c-2 4 0 8 6 9 z"/>
+          </g>
+
+          <g class="subj blob d3">
+            <!-- car -->
+            <path d="M213 161 l12-17 a7 7 0 0 1 5-3 h39 a7 7 0 0 1 5 3 l12 17 z"/>
+            <rect x="192" y="159" width="114" height="23" rx="6"/>
+            <circle cx="215" cy="183" r="9.5"/>
+            <circle cx="283" cy="183" r="9.5"/>
+          </g>
+
+          <!-- detections -->
+          <g class="bx b1">
+            <rect x="51" y="49" width="50" height="153" rx="3"/>
+            <rect class="tagbg" x="51" y="37" width="63" height="13" rx="2.5"/>
+            <text class="tag" x="55.5" y="46.5">person 0.96</text>
+          </g>
+          <g class="bx b2">
+            <rect x="105" y="142" width="79" height="64" rx="3"/>
+            <rect class="tagbg" x="105" y="130" width="46" height="13" rx="2.5"/>
+            <text class="tag" x="109.5" y="139.5">dog 0.89</text>
+          </g>
+          <g class="bx b3">
+            <rect x="188" y="136" width="126" height="60" rx="3"/>
+            <rect class="tagbg" x="188" y="124" width="46" height="13" rx="2.5"/>
+            <text class="tag" x="192.5" y="133.5">car 0.93</text>
+          </g>
+
+          <!-- sweep -->
+          <g class="sweep">
+            <rect x="0" y="0" width="336" height="1.4" fill="url(#gSweep)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="scopeBar">
+        <span>YOLO · object detection</span>
+        <span><b>1,000+</b> images annotated · 70% &rarr; <b>90%</b></span>
+      </div>
+    </div>
+   </div><!-- /heroGrid -->
   </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <hr class="rule" />
+    <div class="row">
+      <div class="label"><div class="kicker">About</div></div>
+      <div class="about reveal">
+        <p>I did my BE in Computer Science in Kerala, finishing with a CGPA of 8.17 and a final-year
+        project that recognised Indian Sign Language gestures with a CNN. Then two years as a software
+        engineer in Bangalore, building Python and FastAPI services over Oracle, PostgreSQL and MySQL,
+        designing how data moved between client systems, supporting those systems when they broke, and
+        training YOLO object detection models on the side of the main work.</p>
+
+        <p>I moved to Ireland in 2025 for an MSc in Data Analytics at TUS Athlone and finished with a 2.1.
+        My dissertation was a fake job posting detector, five classifiers on a heavily imbalanced dataset
+        of 17,645 real postings, where only about 5% were fraudulent. Building it while job-hunting myself
+        gave the problem a certain edge.</p>
+
+        <p>I like the part of the job where something is broken and nobody knows why yet. Based in Athlone,
+        open to software, data and ML roles across Ireland.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- EXPERIENCE -->
   <section id="work">
@@ -358,24 +573,26 @@
           </div>
           <div class="org">Cattleya Technosys · Bangalore, India</div>
           <ul class="points">
-            <li>Designed and shipped Python services end to end, mapping the data flows behind them and lifting client operational efficiency by <span class="figure" data-count="18">18%</span>.</li>
-            <li>Introduced FastAPI into existing systems, cutting data processing time by <span class="figure" data-count="25">25%</span> and tightening interface performance between services.</li>
-            <li>Wrote and tuned SQL against large, multi-source datasets, with reliability and correctness as the priority over raw speed.</li>
-            <li>Kept technical documentation current across the project lifecycle — for the engineers maintaining it and the stakeholders signing off on it.</li>
+            <li>Designed and delivered Python services end to end, requirements through deployment, mapping data flows across client systems and lifting operational efficiency by <span class="figure" data-count="18">18%</span>.</li>
+            <li>Integrated FastAPI into existing systems, speeding up data processing by <span class="figure" data-count="25">25%</span> across connected services.</li>
+            <li>Trained YOLO object detection models for client problems, annotating 1,000+ images by hand and raising accuracy from 70% to 90% through tuning and iterative retraining.</li>
+            <li>Wrote and optimised SQL across Oracle, PostgreSQL and MySQL for large multi-source datasets, prioritising correctness over speed.</li>
+            <li>Supported live client systems: incident analysis, log analysis and root cause work, with deployments run under change management and issues tracked in Jira.</li>
+            <li>Kept technical documentation current for engineers and non-technical stakeholders, working in Agile teams throughout.</li>
           </ul>
         </div>
 
         <div class="job reveal">
           <div class="job-head">
-            <h3>Data Analyst</h3>
+            <h3>Data Analyst Intern</h3>
             <span class="meta">Jan 2023 — May 2023</span>
           </div>
           <div class="org">Trainity · Remote</div>
           <ul class="points">
-            <li>Pulled and filtered data from company databases with SQL to feed specific analysis projects and recurring reports.</li>
-            <li>Cleaned and analysed data in Excel, surfacing business trends and improving reporting readiness by <span class="figure" data-count="20">20%</span>.</li>
-            <li>Automated repetitive data preparation in Python, shortening the turnaround on reports.</li>
-            <li>Built dashboards to customer specification so the numbers people needed were the first thing they saw.</li>
+            <li>Extracted and filtered data from relational databases with SQL to feed analysis projects and recurring reports.</li>
+            <li>Cleaned and validated data in Excel and Python, automating the repetitive preparation steps and cutting prep time by around <span class="figure" data-count="15">15%</span>.</li>
+            <li>Surfaced business trends from the cleaned data, improving reporting readiness by <span class="figure" data-count="20">20%</span>.</li>
+            <li>Built dashboards to customer requirements so the numbers people needed were the first thing they saw.</li>
           </ul>
         </div>
       </div>
@@ -391,12 +608,25 @@
         <h3>Gym Tracker</h3>
         <div class="meta">Full-stack workout tracking app · personal project</div>
         <div class="stack">
-          <span>Flutter</span><span>FastAPI</span><span>PostgreSQL</span><span>Render</span><span>Neon</span>
+          <span>Flutter</span><span>FastAPI</span><span>PostgreSQL</span><span>Docker</span><span>Render</span><span>Neon</span>
         </div>
         <ul class="points">
-          <li>Owned the whole thing: a REST API over PostgreSQL, the client on top of it, and both deployed to cloud hosting on a Git-based workflow.</li>
+          <li>Owned the whole thing: a REST API over PostgreSQL, a Flutter client on top of it, and a Dockerised backend deployed to Linux cloud hosting on a Git-based workflow.</li>
           <li>Added request retries and warm-up handling for cold-start latency, then ran a live schema migration without downtime.</li>
+          <li>Aggregates every logged set into training volume over time, broken down by day and by split, plus streaks and achievements to keep the habit going.</li>
         </ul>
+
+        <div class="shots">
+          <a href="gym-home.png" target="_blank" rel="noopener">
+            <img src="gym-home.png" alt="Gym Tracker home screen showing streak, workout totals, achievements and training split" loading="lazy" />
+          </a>
+          <a href="gym-analytics.png" target="_blank" rel="noopener">
+            <img src="gym-analytics.png" alt="Gym Tracker analytics screen charting workout volume per day and volume by training day" loading="lazy" />
+          </a>
+        </div>
+        <div class="shotcap">Home screen and analytics view · click either to open full size</div>
+
+        <a class="repolink" href="#" data-todo-repo target="_blank" rel="noopener">View the code on GitHub &rarr;</a>
 
         <div class="pm">
           <div class="pm-title">Incident · production outage</div>
@@ -423,6 +653,38 @@
     </div>
   </section>
 
+  <!-- MORE PROJECTS -->
+  <section id="more">
+    <div class="row">
+      <div class="label"></div>
+      <div>
+        <div class="project glowcard reveal" style="margin-bottom:14px;">
+          <h3>Fake Job Post Detection</h3>
+          <div class="meta">MSc dissertation · TUS Athlone</div>
+          <div class="stack">
+            <span>Python</span><span>scikit-learn</span><span>Classification</span><span>EMSCAD dataset</span>
+          </div>
+          <ul class="points">
+            <li>Built and compared five classifiers, Decision Tree, Naïve Bayes, Linear SVM, Random Forest and MLP, across 17,645 real job postings.</li>
+            <li>Handled severe class imbalance: only about 4.86% of the postings were fraudulent, which makes raw accuracy a misleading score. Evaluated the models on measures that survive that skew.</li>
+            <li>Turned the results into practical recommendations for how hiring platforms could screen listings.</li>
+          </ul>
+        </div>
+
+        <div class="project glowcard reveal">
+          <h3>Indian Sign Language Recognition</h3>
+          <div class="meta">BE final year project · APJ Abdul Kalam Technological University</div>
+          <div class="stack">
+            <span>Python</span><span>CNN</span><span>Deep learning</span><span>Computer vision</span>
+          </div>
+          <ul class="points">
+            <li>Built a convolutional neural network to recognise Indian Sign Language gestures, aimed at helping deaf and hard-of-hearing people communicate with people who don't sign.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SKILLS -->
   <section id="skills">
     <hr class="rule" />
@@ -430,33 +692,54 @@
       <div class="label"><div class="kicker">Toolkit</div></div>
       <div class="skillset reveal">
         <div>
-          <h3>Development &amp; platforms</h3>
+          <h3>Languages &amp; frameworks</h3>
           <div class="chips">
-            <span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Java</span>
-            <span class="chip">REST APIs</span><span class="chip">Git</span><span class="chip">CI/CD</span>
-            <span class="chip">Linux / Windows</span><span class="chip">PyTorch</span><span class="chip">YOLO / Computer Vision</span>
+            <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">R</span>
+            <span class="chip">Java</span><span class="chip">Dart / Flutter</span>
+            <span class="chip">FastAPI</span><span class="chip">REST APIs</span>
+          </div>
+          <div class="shotcap">Python and SQL advanced · R, Java and Dart intermediate</div>
+        </div>
+        <div>
+          <h3>Databases &amp; data engineering</h3>
+          <div class="chips">
+            <span class="chip">PostgreSQL</span><span class="chip">Oracle</span><span class="chip">MySQL</span>
+            <span class="chip">SQL Server</span><span class="chip">PL/SQL</span><span class="chip">MongoDB</span>
+            <span class="chip">ETL design</span><span class="chip">Data pipelines</span>
+            <span class="chip">Data modelling</span><span class="chip">Data warehouse concepts</span>
           </div>
         </div>
         <div>
-          <h3>Systems &amp; data</h3>
+          <h3>Machine learning &amp; computer vision</h3>
           <div class="chips">
-            <span class="chip">SQL</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span>
-            <span class="chip">Oracle</span><span class="chip">Data pipeline design</span>
-            <span class="chip">Data flows</span><span class="chip">System interfaces</span>
+            <span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">YOLO</span>
+            <span class="chip">CNNs</span><span class="chip">Classification</span>
+            <span class="chip">Class imbalance handling</span><span class="chip">Hyperparameter tuning</span>
+            <span class="chip">Model evaluation</span><span class="chip">Image annotation</span>
           </div>
         </div>
         <div>
-          <h3>Analysis &amp; tooling</h3>
+          <h3>Analytics &amp; BI</h3>
           <div class="chips">
-            <span class="chip">Power BI</span><span class="chip">Excel</span><span class="chip">R</span>
-            <span class="chip">Data modelling</span><span class="chip">Dashboards</span>
+            <span class="chip">Power BI</span><span class="chip">Tableau</span><span class="chip">Excel</span>
+            <span class="chip">Dashboard development</span><span class="chip">Statistics</span>
+          </div>
+        </div>
+        <div>
+          <h3>Platform &amp; operations</h3>
+          <div class="chips">
+            <span class="chip">Docker</span><span class="chip">Git</span><span class="chip">CI/CD (basics)</span>
+            <span class="chip">Linux / Windows</span><span class="chip">Cloud deployment</span>
+            <span class="chip">Log analysis</span><span class="chip">Incident &amp; root cause analysis</span>
+            <span class="chip">Change management</span><span class="chip">Jira</span>
           </div>
         </div>
         <div>
           <h3>Ways of working</h3>
           <div class="chips">
-            <span class="chip">Agile teams</span><span class="chip">Technical documentation</span>
-            <span class="chip">Cross-functional collaboration</span>
+            <span class="chip">Agile teams</span><span class="chip">Requirements gathering</span>
+            <span class="chip">Technical documentation</span>
+            <span class="chip">Explaining technical work to non-technical people</span>
           </div>
         </div>
       </div>
@@ -472,11 +755,15 @@
         <div class="cards">
           <div class="card glowcard">
             <h3>MSc, Data Analytics</h3>
-            <p>Technological University of the Shannon<br />Athlone, Ireland · 2025—2026</p>
+            <p>Technological University of the Shannon<br />Athlone, Ireland · 2025—2026<br />
+            <strong>2.1 Honours</strong></p>
+            <p style="margin-top:10px;font-size:14px;">Advanced Analytics · Statistics · Data Visualisation (Tableau, Excel) · Programming for Data Analytics (Python) · Interpretation of Data (R) · Relational and Advanced Databases (SQL, PL/SQL, MongoDB)</p>
           </div>
           <div class="card glowcard">
             <h3>BE, Computer Science</h3>
-            <p>APJ Abdul Kalam Technological University<br />Kerala, India · 2018—2022</p>
+            <p>APJ Abdul Kalam Technological University<br />Kerala, India · 2018—2022<br />
+            <strong>CGPA 8.17 / 10</strong></p>
+            <p style="margin-top:10px;font-size:14px;">Data Structures · Algorithms · Database Management Systems · Data Mining &amp; Warehousing · Operating Systems · Computer Networks</p>
           </div>
         </div>
         <div class="certs">
@@ -495,13 +782,13 @@
     <div class="kicker" style="margin-bottom:14px;">Contact</div>
     <p class="foot-h">Hiring? I'd like to hear about it.</p>
     <p class="lede" style="margin-bottom:0;max-width:48ch;">
-      Based in Athlone and available across Ireland — remote, hybrid, or on site.
+      Based in Athlone and available across Ireland, remote, hybrid, or on site.
     </p>
     <div class="foot-links">
       <a href="mailto:nidhinbabu710@gmail.com">nidhinbabu710@gmail.com</a>
       <a href="tel:+353892080592">+353 89 208 0592</a>
-      <a href="#" data-placeholder>GitHub</a>
-      <a href="#" data-placeholder>LinkedIn</a>
+      <a href="https://github.com/nidhinbabumadathil-ie" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/nidhin-babu-m-57a533237" target="_blank" rel="noopener">LinkedIn</a>
     </div>
     <div class="colophon">Nidhin Babu Madathil · Athlone, Ireland</div>
   </div>
@@ -535,6 +822,12 @@
   var words = h1.querySelectorAll('.word');
   words.forEach(function(w, i){ w.style.animationDelay = (0.06 * i + 0.15) + 's'; });
   h1.classList.add('anim');
+
+  /* ---------- 1b. DETECTION VIEWPORT ---------- */
+  if (!reduced) {
+    var scope = document.getElementById('scope');
+    if (scope) scope.classList.add('anim-on');
+  }
 
   /* ---------- 2. SCROLL REVEAL ---------- */
   var items = document.querySelectorAll('.reveal');
